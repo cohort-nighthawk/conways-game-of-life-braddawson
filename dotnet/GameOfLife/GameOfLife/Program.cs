@@ -10,6 +10,7 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
+            BoardSetUp<bool, int, int> board = new BoardSetUp<bool, int, int>(); 
         }
     }
 }
