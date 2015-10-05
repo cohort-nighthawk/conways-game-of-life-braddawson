@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameOfLife;
+using System;
 using System.Collections.Generic;
 
 namespace GameOfLife
@@ -9,5 +10,9 @@ namespace GameOfLife
         {
             Add(new Tuple<T1, T2, T3>(alive, xcoord, ycoord));
         }
+
+        
     }
+
+
 }
