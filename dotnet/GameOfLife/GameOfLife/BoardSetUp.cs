@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameOfLife
 {
-    public class BoardSetUp<T1, T2, T3> : List<Tuple<T1, T2, T3>>
+    public class BoardSetUp<T1, T2, T3> : List<Tuple<T1, T2, T3>>, IEnumerable<Tuple<T1, T2, T3>>
     {
         public void Add(T1 alive, T2 xcoord, T3 ycoord)
         {

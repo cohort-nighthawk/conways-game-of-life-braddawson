@@ -13,6 +13,7 @@ namespace GameOfLife
         {
 
             BoardSetUp<bool, int, int> board = new BoardSetUp<bool, int, int>();
+            //BoardSetUp<bool, int, int> noDupesOnBoard = new BoardSetUp<bool, int, int>();
 
             //take user input
             string userInput;
@@ -52,14 +53,17 @@ namespace GameOfLife
                 xcoord = convertedxyString[0];
                 ycoord = convertedxyString[1];
 
-                Console.WriteLine("x: {0}, y: {1}", xcoord, ycoord);
+                //Console.WriteLine("x: {0}, y: {1}", xcoord, ycoord);
 
                 board.Add(true, xcoord, ycoord);
+                Console.WriteLine("board in loop: {0}", board);
 
             } while (userInput != "start");
 
-            //remove duplicates from board
-            board = board.Distinct().ToList() as BoardSetUp<bool, int, int>;
+
+
+
+
 
 
             foreach (var item in board)
@@ -67,6 +71,17 @@ namespace GameOfLife
                 Console.WriteLine(item);
             }
 
+            //remove duplicates
+            IEnumerable<Tuple<bool, int, int>> noDupesOnBoard = board.Distinct();
+
+            Console.WriteLine(noDupesOnBoard);
+
+            foreach (var item in noDupesOnBoard)
+            {
+                Console.WriteLine(item);
+            }
+
+            //add eight neighboors for each distint cell added to board
 
 
             Console.ReadKey();
