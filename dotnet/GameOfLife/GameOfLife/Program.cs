@@ -81,8 +81,28 @@ namespace GameOfLife
                 Console.WriteLine(item);
             }
 
-            //add eight neighboors for each distint cell added to board
 
+            BoardSetUp<bool, int, int> nextGeneration = new BoardSetUp<bool, int, int>();
+            //add eight neighboors for each distint cell on initial board set up
+            foreach (var item in noDupesOnBoard)
+            {
+                nextGeneration.Add(false, xcoord + 0, ycoord + 1);
+                nextGeneration.Add(false, xcoord + 1, ycoord + 1);
+                nextGeneration.Add(false, xcoord + 1, ycoord + 0);
+                nextGeneration.Add(false, xcoord + 1, ycoord - 1);
+                nextGeneration.Add(false, xcoord - 0, ycoord - 1);
+                nextGeneration.Add(false, xcoord - 1, ycoord - 1);
+                nextGeneration.Add(false, xcoord - 1, ycoord + 0);
+                nextGeneration.Add(false, xcoord - 1, ycoord + 1);
+            }
+
+            int addedNCount = 0;
+            foreach (var item in nextGeneration)
+            {
+                addedNCount++;
+                Console.WriteLine("{1}: {0}",item, addedNCount);
+
+            }
 
             Console.ReadKey();
         }
