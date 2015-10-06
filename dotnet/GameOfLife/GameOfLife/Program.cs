@@ -104,6 +104,20 @@ namespace GameOfLife
 
             }
 
+            //combine initial set up with neighbors
+            //int[] ints1 = { 5, 3, 9, 7, 5, 9, 3, 7 };
+            //int[] ints2 = { 8, 3, 6, 4, 4, 9, 1, 0 };
+
+            //IEnumerable<int> union = ints1.Union(ints2);
+            IEnumerable<Tuple<bool, int, int>> boardOfTheLivingAndDead = board.Concat(nextGeneration);
+            int boardOfTheLivingAndDeadNumber = 0;
+            foreach (var item in boardOfTheLivingAndDead)
+            {
+                boardOfTheLivingAndDeadNumber++;
+                Console.WriteLine("{0}: {1}", boardOfTheLivingAndDeadNumber, item);
+            }
+            
+
             Console.ReadKey();
         }
     }
