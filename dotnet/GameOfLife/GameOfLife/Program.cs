@@ -86,14 +86,14 @@ namespace GameOfLife
             //add eight neighboors for each distint cell on initial board set up
             foreach (var item in noDupesOnBoard)
             {
-                nextGeneration.Add(false, xcoord + 0, ycoord + 1);
-                nextGeneration.Add(false, xcoord + 1, ycoord + 1);
-                nextGeneration.Add(false, xcoord + 1, ycoord + 0);
-                nextGeneration.Add(false, xcoord + 1, ycoord - 1);
-                nextGeneration.Add(false, xcoord - 0, ycoord - 1);
-                nextGeneration.Add(false, xcoord - 1, ycoord - 1);
-                nextGeneration.Add(false, xcoord - 1, ycoord + 0);
-                nextGeneration.Add(false, xcoord - 1, ycoord + 1);
+                nextGeneration.Add(false, item.Item2 + 0, item.Item3 + 1);
+                nextGeneration.Add(false, item.Item2 + 1, item.Item3 + 1);
+                nextGeneration.Add(false, item.Item2 + 1, item.Item3 + 0);
+                nextGeneration.Add(false, item.Item2 + 1, item.Item3 - 1);
+                nextGeneration.Add(false, item.Item2 - 0, item.Item3 - 1);
+                nextGeneration.Add(false, item.Item2 - 1, item.Item3 - 1);
+                nextGeneration.Add(false, item.Item2 - 1, item.Item3 + 0);
+                nextGeneration.Add(false, item.Item2 - 1, item.Item3 + 1);
             }
 
             int addedNCount = 0;
@@ -105,10 +105,6 @@ namespace GameOfLife
             }
 
             //combine initial set up with neighbors
-            //int[] ints1 = { 5, 3, 9, 7, 5, 9, 3, 7 };
-            //int[] ints2 = { 8, 3, 6, 4, 4, 9, 1, 0 };
-
-            //IEnumerable<int> union = ints1.Union(ints2);
             IEnumerable<Tuple<bool, int, int>> boardOfTheLivingAndDead = board.Concat(nextGeneration);
             int boardOfTheLivingAndDeadNumber = 0;
             foreach (var item in boardOfTheLivingAndDead)
@@ -116,7 +112,19 @@ namespace GameOfLife
                 boardOfTheLivingAndDeadNumber++;
                 Console.WriteLine("{0}: {1}", boardOfTheLivingAndDeadNumber, item);
             }
-            
+
+            //count how many time each cell in in the list
+            var groups = boardOfTheLivingAndDead.GroupBy(cell => cell);
+            foreach (var item in groups)
+            {
+                Console.WriteLine("{0} occurs {1} times",item.Key, item.Count());
+            }
+
+
+
+
+
+
 
             Console.ReadKey();
         }
