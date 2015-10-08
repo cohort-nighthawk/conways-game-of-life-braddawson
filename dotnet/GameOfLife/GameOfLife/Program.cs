@@ -113,7 +113,11 @@ namespace GameOfLife
             var groups = boardOfTheLivingAndDead.GroupBy(cell => cell);
             foreach (var item in groups)
             {
-                Console.WriteLine("{0} occurs {1} times",item.Key, item.Count());
+                Console.WriteLine("{0} occurs {1} times, if 3 and false: birth!",item.Key, item.Count());
+                if (item.Count() == 3 && item.Key.Item1 == false)
+                {
+                    nextGeneration.Add(item.Key);
+                }
 
             }
 
@@ -147,6 +151,12 @@ namespace GameOfLife
                     Console.WriteLine("the cell {0} survives with {1} neighbors", item, numberOfLiveNeighbors);
                     nextGeneration.Add(item);
                 }
+            }
+
+            Console.WriteLine("These are the living in the next generation:");
+            foreach (var item in nextGeneration)
+            {
+                Console.WriteLine(item);
             }
 
             Console.ReadKey();
