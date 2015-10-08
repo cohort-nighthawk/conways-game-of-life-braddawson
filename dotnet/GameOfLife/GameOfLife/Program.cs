@@ -12,15 +12,17 @@ namespace GameOfLife
         static void Main(string[] args)
         {
 
-            BoardSetUp<bool, int, int> board = new BoardSetUp<bool, int, int>();
-            //BoardSetUp<bool, int, int> noDupesOnBoard = new BoardSetUp<bool, int, int>();
+            Board<bool, int, int> board = new Board<bool, int, int>();
+            Board<bool, int, int> nextGeneration = new Board<bool, int, int>();
+
+            //Board<bool, int, int> noDupesOnBoard = new Board<bool, int, int>();
 
             //take user input
             string userInput;
             Console.Write("Enter 'x,y' coordinates for a living cell:");
             userInput = Console.ReadLine();
 
-            //convert user input and add to BoardSetUp
+            //convert user input and add to Board
 
             int xcoord;
             int ycoord;
@@ -47,7 +49,7 @@ namespace GameOfLife
                     break;
                 }
 
-                //convert user input and add to BoardSetUp
+                //convert user input and add to Board
                 xyString = userInput.Split(',');
                 convertedxyString = Array.ConvertAll<string, int>(xyString, int.Parse);
                 xcoord = convertedxyString[0];
@@ -59,12 +61,6 @@ namespace GameOfLife
                 Console.WriteLine("board in loop: {0}", board);
 
             } while (userInput != "start");
-
-
-
-
-
-
 
             foreach (var item in board)
             {
@@ -82,22 +78,22 @@ namespace GameOfLife
             }
 
 
-            BoardSetUp<bool, int, int> nextGeneration = new BoardSetUp<bool, int, int>();
+            Board<bool, int, int> transGen = new Board<bool, int, int>();
             //add eight neighboors for each distint cell on initial board set up
             foreach (var item in noDupesOnBoard)
             {
-                nextGeneration.Add(false, item.Item2 + 0, item.Item3 + 1);
-                nextGeneration.Add(false, item.Item2 + 1, item.Item3 + 1);
-                nextGeneration.Add(false, item.Item2 + 1, item.Item3 + 0);
-                nextGeneration.Add(false, item.Item2 + 1, item.Item3 - 1);
-                nextGeneration.Add(false, item.Item2 - 0, item.Item3 - 1);
-                nextGeneration.Add(false, item.Item2 - 1, item.Item3 - 1);
-                nextGeneration.Add(false, item.Item2 - 1, item.Item3 + 0);
-                nextGeneration.Add(false, item.Item2 - 1, item.Item3 + 1);
+                transGen.Add(false, item.Item2 + 0, item.Item3 + 1);
+                transGen.Add(false, item.Item2 + 1, item.Item3 + 1);
+                transGen.Add(false, item.Item2 + 1, item.Item3 + 0);
+                transGen.Add(false, item.Item2 + 1, item.Item3 - 1);
+                transGen.Add(false, item.Item2 - 0, item.Item3 - 1);
+                transGen.Add(false, item.Item2 - 1, item.Item3 - 1);
+                transGen.Add(false, item.Item2 - 1, item.Item3 + 0);
+                transGen.Add(false, item.Item2 - 1, item.Item3 + 1);
             }
 
             int addedNCount = 0;
-            foreach (var item in nextGeneration)
+            foreach (var item in transGen)
             {
                 addedNCount++;
                 Console.WriteLine("{1}: {0}",item, addedNCount);
@@ -105,7 +101,7 @@ namespace GameOfLife
             }
 
             //combine initial set up with neighbors
-            IEnumerable<Tuple<bool, int, int>> boardOfTheLivingAndDead = board.Concat(nextGeneration);
+            IEnumerable<Tuple<bool, int, int>> boardOfTheLivingAndDead = board.Concat(transGen);
             int boardOfTheLivingAndDeadNumber = 0;
             foreach (var item in boardOfTheLivingAndDead)
             {
@@ -113,18 +109,45 @@ namespace GameOfLife
                 Console.WriteLine("{0}: {1}", boardOfTheLivingAndDeadNumber, item);
             }
 
-            //count how many time each cell in in the list
+            //count how many time each cell in in the list, this is the count of adjacent living cells used for birth
             var groups = boardOfTheLivingAndDead.GroupBy(cell => cell);
             foreach (var item in groups)
             {
                 Console.WriteLine("{0} occurs {1} times",item.Key, item.Count());
+
             }
 
+            //find living cells that will survive to next generation
+            // item1 == true && 2 or 3 neighbors with item1 == true
+            // look at initial board set up (board)
+            foreach (var item in noDupesOnBoard)
+            {
+                int numberOfLiveNeighbors = 0;
+                // create local neighbor list
+                Board<bool, int, int> localNeighbors = new Board<bool, int, int>();
+                localNeighbors.Add(true, item.Item2 + 0, item.Item3 + 1);
+                localNeighbors.Add(true, item.Item2 + 1, item.Item3 + 1);
+                localNeighbors.Add(true, item.Item2 + 1, item.Item3 + 0);
+                localNeighbors.Add(true, item.Item2 + 1, item.Item3 - 1);
+                localNeighbors.Add(true, item.Item2 - 0, item.Item3 - 1);
+                localNeighbors.Add(true, item.Item2 - 1, item.Item3 - 1);
+                localNeighbors.Add(true, item.Item2 - 1, item.Item3 + 0);
+                localNeighbors.Add(true, item.Item2 - 1, item.Item3 + 1);
 
+                foreach (var liveCell in noDupesOnBoard)
+                {
+                    if (localNeighbors.Contains(liveCell))
+                    {
+                        numberOfLiveNeighbors++;
+                    }
+                }
 
-
-
-
+                if (numberOfLiveNeighbors == 2 || numberOfLiveNeighbors == 3)
+                {
+                    Console.WriteLine("the cell {0} survives with {1} neighbors", item, numberOfLiveNeighbors);
+                    nextGeneration.Add(item);
+                }
+            }
 
             Console.ReadKey();
         }
