@@ -58,23 +58,23 @@ namespace GameOfLife
                 //Console.WriteLine("x: {0}, y: {1}", xcoord, ycoord);
 
                 board.Add(true, xcoord, ycoord);
-                Console.WriteLine("board in loop: {0}", board);
+                //Console.WriteLine("board in loop: {0}", board);
 
             } while (userInput != "start");
 
             foreach (var item in board)
             {
-                Console.WriteLine(item);
+                //Console.WriteLine(item);
             }
 
             //remove duplicates
             IEnumerable<Tuple<bool, int, int>> noDupesOnBoard = board.Distinct();
 
-            Console.WriteLine(noDupesOnBoard);
+            //Console.WriteLine(noDupesOnBoard);
 
             foreach (var item in noDupesOnBoard)
             {
-                Console.WriteLine(item);
+                //Console.WriteLine(item);
             }
 
 
@@ -96,7 +96,7 @@ namespace GameOfLife
             foreach (var item in transGen)
             {
                 addedNCount++;
-                Console.WriteLine("{1}: {0}",item, addedNCount);
+                //Console.WriteLine("{1}: {0}",item, addedNCount);
 
             }
 
@@ -106,14 +106,14 @@ namespace GameOfLife
             foreach (var item in boardOfTheLivingAndDead)
             {
                 boardOfTheLivingAndDeadNumber++;
-                Console.WriteLine("{0}: {1}", boardOfTheLivingAndDeadNumber, item);
+                //Console.WriteLine("{0}: {1}", boardOfTheLivingAndDeadNumber, item);
             }
 
             //count how many time each cell in in the list, this is the count of adjacent living cells used for birth
             var groups = boardOfTheLivingAndDead.GroupBy(cell => cell);
             foreach (var item in groups)
             {
-                Console.WriteLine("{0} occurs {1} times, if 3 and false: birth!",item.Key, item.Count());
+                //Console.WriteLine("{0} occurs {1} times, if 3 and false: birth!",item.Key, item.Count());
                 if (item.Count() == 3 && item.Key.Item1 == false)
                 {
                     nextGeneration.Add(item.Key);
@@ -148,7 +148,7 @@ namespace GameOfLife
 
                 if (numberOfLiveNeighbors == 2 || numberOfLiveNeighbors == 3)
                 {
-                    Console.WriteLine("the cell {0} survives with {1} neighbors", item, numberOfLiveNeighbors);
+                    //Console.WriteLine("the cell {0} survives with {1} neighbors", item, numberOfLiveNeighbors);
                     nextGeneration.Add(item);
                 }
             }
