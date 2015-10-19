@@ -16,9 +16,9 @@ namespace GameOfLife
         {
             this.xcoord = xcoord;
             this.ycoord = ycoord;
-            this.vitalStatus = true;
+            this.extant = true;
         }
 
-        public bool vitalStatus { get; set; }
+        public bool extant { get; set; }
     }
 }

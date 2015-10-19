@@ -11,7 +11,15 @@ namespace GameOfLifeTests
         public void TheCellIsAlive()
         {
             Cell cell = new Cell(0, 0);
-            Assert.IsTrue(cell.vitalStatus);
+            Assert.IsTrue(cell.extant);
+        }
+
+        [TestMethod]
+        public void AddCellMethodAddsACellToGameBoard()
+        {
+            GameBoard dish = new GameBoard();
+            dish.AddCell(0, 0);
+            Assert.IsTrue(dish.Count == 1);
         }
 
 
