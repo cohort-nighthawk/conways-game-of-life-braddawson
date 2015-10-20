@@ -22,12 +22,16 @@ namespace GameOfLifeTests
             Assert.IsTrue(dish.Count == 1);
         }
 
-
-
-
-
-
-
+        [TestMethod]
+        public void TheCellsLocation()
+        {
+            var expectedXcoord = 0;
+            var expectedYcoord = 1;
+            GameBoard board = new GameBoard();
+            board.AddCell(0, 1);
+            Assert.AreEqual(expectedXcoord, board[0].xcoord);
+            Assert.AreEqual(expectedYcoord, board[0].ycoord);
+        }
 
 
 

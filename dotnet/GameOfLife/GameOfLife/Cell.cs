@@ -8,8 +8,8 @@ namespace GameOfLife
 {
     public class Cell
     {
-        private int xcoord;
-        private int ycoord;
+        public int xcoord;
+        public int ycoord;
         
 
         public Cell(int xcoord, int ycoord)
