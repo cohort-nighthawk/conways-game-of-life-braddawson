@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GameOfLife;
+using System.Collections.Generic;
 
 namespace GameOfLifeTests
 {
@@ -12,6 +13,14 @@ namespace GameOfLifeTests
         {
             Cell cell = new Cell(0, 0);
             Assert.IsTrue(cell.extant);
+        }
+
+        [TestMethod]
+        public void CellAddedToGameBoardIsAlive()
+        {
+            GameBoard board = new GameBoard();
+            board.AddCell(0, 0);
+            Assert.IsTrue(board[0].extant);
         }
 
         [TestMethod]
@@ -31,6 +40,13 @@ namespace GameOfLifeTests
             board.AddCell(0, 1);
             Assert.AreEqual(expectedXcoord, board[0].xcoord);
             Assert.AreEqual(expectedYcoord, board[0].ycoord);
+        }
+
+        [TestMethod]
+        public void ACellsNeighbourhoodIsEveryLocationAroundACell()
+        {
+            Cell cell = new Cell(0, 0, true);
+            
         }
 
 

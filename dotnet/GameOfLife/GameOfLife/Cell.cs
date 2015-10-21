@@ -11,6 +11,12 @@ namespace GameOfLife
         public int xcoord;
         public int ycoord;
         
+        public Cell(int xcoord, int ycoord, bool extant)
+        {
+            this.xcoord = xcoord;
+            this.ycoord = ycoord;
+            this.extant = extant;
+        }
 
         public Cell(int xcoord, int ycoord)
         {
