@@ -10,12 +10,19 @@ namespace GameOfLife
     {
         public int xcoord;
         public int ycoord;
+        public Neighbourhood neighbourhood;
         
         public Cell(int xcoord, int ycoord, bool extant)
         {
             this.xcoord = xcoord;
             this.ycoord = ycoord;
             this.extant = extant;
+            if (extant == true)
+            {
+                this.neighbourhood = new Neighbourhood();
+                this.neighbourhood.AddEmptyCell(this.xcoord + 0, this.ycoord + 1, false);
+            }
+
         }
 
         public Cell(int xcoord, int ycoord)

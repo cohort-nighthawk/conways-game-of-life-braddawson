@@ -45,8 +45,9 @@ namespace GameOfLifeTests
         [TestMethod]
         public void ACellsNeighbourhoodIsEveryLocationAroundACell()
         {
+            Cell expected = new Cell(0, 1, false);
             Cell cell = new Cell(0, 0, true);
-            
+            Assert.AreEqual(expected.ToString(), cell.neighbourhood[0].ToString());
         }
 
 
