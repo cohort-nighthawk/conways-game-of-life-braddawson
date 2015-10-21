@@ -43,11 +43,19 @@ namespace GameOfLifeTests
         }
 
         [TestMethod]
-        public void ACellsNeighbourhoodIsEveryLocationAroundACell()
+        public void ACellsNeighbourhoodIsEveryLocationAroundACell()//creates only one neighbour for now
         {
-            Cell expected = new Cell(0, 1, false);
+            Neighbourhood expected = new Neighbourhood();
+            expected.AddEmptyCell(0, 1, false);
+            expected.AddEmptyCell(1, 1, false);
+            expected.AddEmptyCell(1, 0, false);
+            expected.AddEmptyCell(1, -1, false);
+            expected.AddEmptyCell(0, -1, false);
+            expected.AddEmptyCell(-1, -1, false);
+            expected.AddEmptyCell(-1, 0, false);
+            expected.AddEmptyCell(-1, 1, false);
             Cell cell = new Cell(0, 0, true);
-            Assert.AreEqual(expected.ToString(), cell.neighbourhood[0].ToString());
+            Assert.AreEqual(expected.ToString(), cell.neighbourhood.ToString());
         }
 
 

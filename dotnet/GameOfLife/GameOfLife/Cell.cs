@@ -21,6 +21,13 @@ namespace GameOfLife
             {
                 this.neighbourhood = new Neighbourhood();
                 this.neighbourhood.AddEmptyCell(this.xcoord + 0, this.ycoord + 1, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord + 1, this.ycoord + 1, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord + 1, this.ycoord + 0, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord + 1, this.ycoord - 1, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord + 0, this.ycoord - 1, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord - 1, this.ycoord - 1, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord - 1, this.ycoord + 0, false);
+                this.neighbourhood.AddEmptyCell(this.xcoord - 1, this.ycoord + 1, false);
             }
 
         }
