@@ -14,5 +14,14 @@ namespace GameOfLife
             Cell cell = new Cell(v1, v2);
             this.Add(cell);
         }
+
+        public void Transition()
+        {
+            //create new list to hold cells and neighbours
+            
+        }
+
+        //method to go to next generation of cells
+
     }
 }

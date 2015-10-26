@@ -9,6 +9,34 @@ namespace GameOfLifeTests
     public class GameOfLifeTests
     {
         [TestMethod]
+        public void CovertUserInput()
+        {
+            var expectedXValue = 0;
+            var expectedYValue = 1;
+            var userInput = "0,1";
+            UserInput.Covert(userInput);
+            Assert.AreEqual(expectedXValue, UserInput.xcoord);
+            Assert.AreEqual(expectedYValue, UserInput.ycoord);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [TestMethod]
         public void TheCellIsAlive()
         {
             Cell cell = new Cell(0, 0);
@@ -58,7 +86,16 @@ namespace GameOfLifeTests
             Assert.AreEqual(expected.ToString(), cell.neighbourhood.ToString());
         }
 
+        [TestMethod]
+        public void CombineStartingCellWithNeighbourCells()
+        {
+            GameBoard board = new GameBoard();
+            board.AddCell(0, 1);
+            board.AddCell(0, 0);
+            board.AddCell(0, -1);
+            board.Transition();
 
+        }
 
         //Any live cell with fewer than two live neighbours dies, as if caused by under-population.
 
